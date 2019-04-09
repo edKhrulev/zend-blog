@@ -1,0 +1,46 @@
+
+
+<?php
+
+    $title = 'Comments';
+    $this->headTitle($title);
+    ?>
+    <h1><?= $this->escapeHtml($title) ?></h1>
+
+    <table class="table">
+        <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Description</th>
+            <th>Created</th>
+            <th>Updated</th>
+
+        </tr>
+        <?php foreach ($paginator as $comment) : ?>
+            <tr>
+
+                <td><?= $this->escapeHtml($comment->name) ?></td>
+                <td><?= $this->escapeHtml($comment->email) ?></td>
+                <td><?= $this->escapeHtml($comment->desc) ?></td>
+                <td><?= $this->escapeHtml($comment->created_at) ?></td>
+                <td><?= $this->escapeHtml($comment->updated_at) ?></td>
+                <td>
+                    <a href="<?= $this->url('blog', ['action' => 'edit', 'id' => $comment->id]) ?>">Edit</a>
+                    <a href="<?= $this->url('blog', ['action' => 'delete', 'id' => $comment->id]) ?>">Delete</a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
+
+<?= $this->paginationControl(
+// The paginator object:
+    $this->paginator,
+    // The scrolling style:
+    'sliding',
+    // The partial to use to render the control:
+    'partial/paginator',
+    // The route to link to when a user clicks a control link:
+    ['route' => 'home']
+) ?>
+
+
