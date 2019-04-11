@@ -42,13 +42,20 @@ class BlogController extends AbstractActionController
 
     public function addAction()
     {
+//        $id = (int) $this->params()->fromRoute('id', 0);
+//        if (!$id) {
+//            return $this->redirect()->toRoute('home');
+//        }
+
         $form = new CommentForm();
         $form->get('submit')->setValue('Save');
+
+        $viewModel = new ViewModel(['form' => $form]);
 
         $request = $this->getRequest();
 
         if (!$request->isPost()) {
-            return ['form' => $form];
+            return  $viewModel;
         }
 
         $comment = new Comment();
@@ -56,7 +63,7 @@ class BlogController extends AbstractActionController
         $form->setData($request->getPost());
 
         if (!$form->isValid()) {
-            return ['form' => $form];
+            return $viewModel;
         }
 
         $comment->exchangeArray($form->getData());

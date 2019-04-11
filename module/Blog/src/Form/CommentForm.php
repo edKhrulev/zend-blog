@@ -48,7 +48,7 @@ class CommentForm extends Form
             'name' => 'submit',
             'type' => 'submit',
             'attributes' => [
-                'value' => 'Go',
+                'value' => 'Insert new Comment',
                 'id'    => 'submitbutton',
             ],
         ]);
